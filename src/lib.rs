@@ -1,1 +1,1 @@
-mod curve;
+pub mod curve;
