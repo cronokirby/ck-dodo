@@ -4,7 +4,7 @@ use ck_dodo::curve::field::Fp;
 
 fn fp_benchmark(c: &mut Criterion) {
     let a = Fp::constant();
-    c.bench_function("Fp add", |b| b.iter(|| black_box(a).add(black_box(a))));
+    c.bench_function("Fp *=", |b| b.iter(|| *(&mut black_box(a)) *= black_box(a)));
 }
 
 criterion_group!(benches, fp_benchmark);
