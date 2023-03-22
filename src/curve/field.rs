@@ -68,7 +68,7 @@ impl Fp {
 
 use std::arch::asm;
 
-#[cfg(all(target_arch = "x86_64", target_feature = "sse"))]
+#[cfg(all(target_arch = "x86_64", target_feature = "bmi2"))]
 impl MulAssign for Fp {
     fn mul_assign(&mut self, other: Fp) {
         let mut out = [0u64; 2 * N];
@@ -117,7 +117,7 @@ impl MulAssign for Fp {
     }
 }
 
-#[cfg(not(target_arch = "x86_64"))]
+#[cfg(not(all(target_arch = "x86_64", target_feature = "bmi2")))]
 impl MulAssign for Fp {
     fn mul_assign(&mut self, other: Fp) {
         // You can treat both of these functions as macros. They just exist to avoid
